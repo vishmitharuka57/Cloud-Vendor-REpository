@@ -1,7 +1,10 @@
 package lk.ijse.gdse.springboot.controller;
 
 import lk.ijse.gdse.springboot.model.CloudVendor;
+import lk.ijse.gdse.springboot.response.ResponseHandler;
 import lk.ijse.gdse.springboot.service.CloudVendorService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,9 +20,10 @@ public class CloudVendorController {
 
     //Read specific cloud vendor details
     @GetMapping("{vendorId}")
-    public CloudVendor getCloudVendorDetails(@PathVariable("vendorId") String vendorId){
+    public ResponseEntity<Object> getCloudVendorDetails(@PathVariable("vendorId") String vendorId){
       //  return new CloudVendor("C1","Vendor 1","Address 1","0112332212");
-        return cloudVendorService.getCloudVendor(vendorId);
+       return ResponseHandler.responseBuilder("REquested Vendor Details are given here", HttpStatus.OK, cloudVendorService.getCloudVendor(vendorId));
+
     }
 
     //Read all cloud vendor details from DB
